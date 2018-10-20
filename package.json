@@ -1,0 +1,63 @@
+{
+  "name": "unlightbox",
+  "version": "1.0.0",
+  "description": "A simple image viewer for react which does not add any extra UI like modals.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --open & start-storybook -p 6006 -c .storybook",
+    "storybook": "start-storybook -p 6006 -c .storybook"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jobinabraham15/unlightbox.git"
+  },
+  "keywords": [
+    "No",
+    "modal",
+    "image",
+    "viewer",
+    "lightbox",
+    "without",
+    "modal",
+    "zoom",
+    "in",
+    "zoom",
+    "out"
+  ],
+  "author": "Jobin Abraham",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jobinabraham15/unlightbox/issues"
+  },
+  "homepage": "https://github.com/jobinabraham15/unlightbox#readme",
+  "dependencies": {
+    "react": "^16.5.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "@storybook/addon-info": "^3.4.11",
+    "@storybook/addon-knobs": "^3.4.11",
+    "@storybook/react": "^4.0.0-alpha.24",
+    "@types/jest": "^23.3.5",
+    "@types/react": "^16.4.17",
+    "@types/react-dom": "^16.0.9",
+    "@types/storybook__react": "^3.0.9",
+    "awesome-typescript-loader": "^5.2.1",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.4",
+    "jest": "^23.6.0",
+    "react-docgen-typescript-loader": "^3.0.0",
+    "react-docgen-typescript-webpack-plugin": "^1.1.0",
+    "react-dom": "^16.5.2",
+    "storybook-addon-jsx": "^5.4.0",
+    "ts-jest": "^23.10.4",
+    "ts-loader": "^5.2.2",
+    "typescript": "^3.1.3",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.9"
+  }
+}
