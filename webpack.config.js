@@ -14,7 +14,7 @@ module.exports = {
   },
   mode: "development",
   resolve: {
-    extensions: [".tsx", ".js", ".json"]
+    extensions: [".tsx",".ts", ".js", ".json"]
   },
   module: {
     rules: [

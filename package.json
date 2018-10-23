@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --open & start-storybook -p 6006 -c .storybook",
-    "storybook": "start-storybook -p 6006 -c .storybook"
+    "storybook": "start-storybook -p 6006 -c .storybook",
+    "watch": "webpack -w",
+    "server": "npm run watch | npm run start"
   },
   "repository": {
     "type": "git",
