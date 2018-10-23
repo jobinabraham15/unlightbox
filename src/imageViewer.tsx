@@ -1,12 +1,14 @@
 import * as React from "react";
 import { imageLoad } from "./imageLoad";
 import { number } from "prop-types";
+import Draggable from "./draggable";
 
 interface IImageViewerProps {
   /**
    * url for the image file to be uploaded
    */
   url: string;
+
   /**
    * Width of the container box that will contain the viewer
    */
@@ -23,6 +25,7 @@ interface IImageInternalStates<T> {
    * React Ref for the container that holds the image
    */
   imageRef: React.RefObject<T>; // Find this out
+
   /**
    * React Ref for the container that is draggable
    */
@@ -35,6 +38,7 @@ interface IImageInternalStates<T> {
   containerStyle?: any;
   image: any;
   processedImage: boolean;
+  imgRotation: number;
 }
 
 /**
@@ -94,8 +98,9 @@ export default class ImageViewer extends React.Component<
     btnZoomOut: BUTTON_STATES.active,
     image: null,
     processedImage: false,
-    containerWidth: this.props.containerWidth || 600,
-    containerHeight: this.props.containerHeight || 600
+    containerWidth: this.props.containerWidth || 300,
+    containerHeight: this.props.containerHeight || 300,
+    imgRotation: 0
   });
 
   /**
@@ -114,17 +119,34 @@ export default class ImageViewer extends React.Component<
   /**
    * Zooming in functionality of the viewer
    */
-  protected zoomIn = () => {};
+  protected zoomIn = () => {
+    console.log("Zoomiin");
+    const currentWidth = Number(this.state.imageWidth.split(/(px|%)$/)[0]);
+    const zoomedWidth = currentWidth + 50;
+    this.setState({
+      imageWidth: zoomedWidth + "px"
+    });
+  };
 
   /**
    * Zooming out functionality of the viewer
    */
-  protected zoomOut = () => {};
+  protected zoomOut = () => {
+    const currentWidth = Number(this.state.imageWidth.split(/(px|%)$/)[0]);
+    const zoomedWidth = currentWidth - 50;
+    this.setState({
+      imageWidth: zoomedWidth + "px"
+    });
+  };
 
   /**
    * Rotate functionality of the viewer
    */
-  protected rotate = () => {};
+  protected rotate = () => {
+    let imgRotation = this.state.imgRotation;
+    imgRotation = imgRotation >= 270 ? 0 : imgRotation + 90;
+    this.setState({ imgRotation });
+  };
 
   /**
    * Process the image view once the image has been loaded on the client
@@ -146,6 +168,7 @@ export default class ImageViewer extends React.Component<
       width = width + "px";
     }
 
+    // To scale down the height of the image wrt to the width
     if (containerHeight > originalImageHeight) {
       height = containerHeight;
     }
@@ -166,6 +189,11 @@ export default class ImageViewer extends React.Component<
    * Rotate functionality of the viewer
    */
   render() {
+    let styles = Object.assign({}, imageStyle, {
+      width: this.state.imageWidth,
+      height: this.state.imageHeight,
+      transform: `rotate(${this.state.imgRotation}deg)`
+    });
     return (
       <div>
         <div className={"toolbar"}>
@@ -181,38 +209,33 @@ export default class ImageViewer extends React.Component<
             </button>
           </div>
         </div>
-        <div ref={this.state.dragableContainerRef}>
-          <div
-            style={{
-              marginTop: "20px",
-              marginBottom: "20px"
-            }}
-          >
-            {!this.state.image ? (
-              <h1
-                style={{
-                  color: "#969696",
-                  textAlign: "center",
-                  marginTop: "30px"
-                }}
-              >
-                <div>{"Loading your image"}</div>
-              </h1>
-            ) : (
-              <img
-                style={Object.assign(imageStyle, {
-                  width: this.state.imageWidth,
-                  height: this.state.imageWidth
-                })}
-                ref={this.state.imageRef}
-                // onLoad={e => {
-                //   this.onImageLoad();
-                // }}
-                src={this.state.image.src}
-              />
-            )}
-          </div>
-        </div>
+        <Draggable
+          style={{
+            width: this.state.containerWidth,
+            height: this.state.containerHeight,
+            overflow: "visible"
+          }}
+          width={this.state.containerWidth}
+          height={this.state.containerHeight}
+        >
+          {!this.state.image ? (
+            <h1
+              style={{
+                color: "#969696",
+                textAlign: "center",
+                marginTop: "30px"
+              }}
+            >
+              <div>{"Loading your image"}</div>
+            </h1>
+          ) : (
+            <img
+              style={styles}
+              ref={this.state.imageRef}
+              src={this.state.image.src}
+            />
+          )}
+        </Draggable>
       </div>
     );
   }
