@@ -1,6 +1,5 @@
 import * as React from "react";
 import { imageLoad } from "./imageLoad";
-import { number } from "prop-types";
 import Draggable from "./draggable";
 
 interface IImageViewerProps {
@@ -39,6 +38,8 @@ interface IImageInternalStates<T> {
   image: any;
   processedImage: boolean;
   imgRotation: number;
+  imageFit: string;
+  imageX: number;
 }
 
 /**
@@ -67,7 +68,8 @@ interface IButtons {
 const imageStyle = {
   objectFit: "scale-down",
   display: "block",
-  margin: "0 auto"
+  margin: "0 auto",
+  position: "relative"
 };
 
 /**
@@ -100,7 +102,9 @@ export default class ImageViewer extends React.Component<
     processedImage: false,
     containerWidth: this.props.containerWidth || 300,
     containerHeight: this.props.containerHeight || 300,
-    imgRotation: 0
+    imgRotation: 0,
+    imageFit: "scale-down",
+    imageX: 0
   });
 
   /**
@@ -116,16 +120,97 @@ export default class ImageViewer extends React.Component<
     };
   };
 
+  private disableZoomIn = () => {
+    if (this.state.btnZoomIn !== BUTTON_STATES.disabled) {
+      this.setState({
+        btnZoomIn: BUTTON_STATES.disabled
+      });
+    } else {
+      return;
+    }
+  };
+
+  private enableZoomIn = () => {
+    if (this.state.btnZoomIn !== BUTTON_STATES.active) {
+      this.setState({
+        btnZoomIn: BUTTON_STATES.active
+      });
+    } else {
+      return;
+    }
+  };
+
+  private disableZoomOut = () => {
+    if (this.state.btnZoomOut !== BUTTON_STATES.disabled) {
+      this.setState({
+        btnZoomOut: BUTTON_STATES.disabled
+      });
+    } else {
+      return;
+    }
+  };
+
+  private enableZoomOut = () => {
+    if (this.state.btnZoomOut !== BUTTON_STATES.active) {
+      this.setState({
+        btnZoomOut: BUTTON_STATES.active
+      });
+    } else {
+      return;
+    }
+  };
+
   /**
    * Zooming in functionality of the viewer
    */
   protected zoomIn = () => {
-    console.log("Zoomiin");
     const currentWidth = Number(this.state.imageWidth.split(/(px|%)$/)[0]);
-    const zoomedWidth = currentWidth + 50;
-    this.setState({
-      imageWidth: zoomedWidth + "px"
-    });
+    const image = this.state.image;
+    const originalImageWidth = image.naturalWidth;
+    const originalImageHeight = image.naturalHeight;
+    const imageRatio = originalImageWidth / originalImageHeight;
+    let height, imageFit;
+    // Keep the zoom from going beyond boundaries
+    if (
+      currentWidth >= originalImageWidth - 30 &&
+      originalImageWidth > this.state.containerWidth
+    ) {
+      this.disableZoomIn();
+    } else {
+      const zoomedWidth = currentWidth + 50;
+
+      // Disable zoomin if the future zoom might go out of bounds
+      if (
+        zoomedWidth > originalImageWidth &&
+        originalImageWidth > this.state.containerWidth
+      ) {
+        this.disableZoomIn();
+      }
+
+      // Enable ZoomOut if it was previously disabled
+      if (zoomedWidth >= originalImageWidth / 10) {
+        this.enableZoomOut();
+      }
+    //   let imageX;
+    //   imageX =
+    //     this.state.containerWidth -
+    //     zoomedWidth +
+    //     (originalImageWidth - zoomedWidth) / 50;
+
+    //   height =
+    //     originalImageWidth >= originalImageHeight &&
+    //     originalImageWidth < this.state.containerWidth
+    //       ? zoomedWidth / imageRatio + "px"
+    //       : height;
+
+      // Zoom
+      this.setState({
+        imageWidth: zoomedWidth + "px",
+        imageHeight: height || this.state.imageHeight,
+        imageFit: imageFit || this.state.imageFit,
+        // imageX: imageX < 0 ? imageX : this.state.imageX
+      });
+    }
   };
 
   /**
@@ -133,10 +218,24 @@ export default class ImageViewer extends React.Component<
    */
   protected zoomOut = () => {
     const currentWidth = Number(this.state.imageWidth.split(/(px|%)$/)[0]);
-    const zoomedWidth = currentWidth - 50;
-    this.setState({
-      imageWidth: zoomedWidth + "px"
-    });
+    const containerWidth = this.state.containerWidth;
+    // Disable
+    if (containerWidth <= currentWidth / 10) {
+      this.disableZoomOut();
+      this.enableZoomIn();
+    } else {
+      const zoomedWidth = currentWidth - 50;
+      if (currentWidth + 50 >= containerWidth) {
+        this.enableZoomIn();
+      }
+      if (zoomedWidth <= containerWidth / 10) {
+        this.disableZoomOut();
+      }
+
+      this.setState({
+        imageWidth: zoomedWidth + "px"
+      });
+    }
   };
 
   /**
@@ -145,7 +244,82 @@ export default class ImageViewer extends React.Component<
   protected rotate = () => {
     let imgRotation = this.state.imgRotation;
     imgRotation = imgRotation >= 270 ? 0 : imgRotation + 90;
-    this.setState({ imgRotation });
+
+    const originalImage = this.state.image;
+    const clientHeight = originalImage.height;
+    const clientWidth = originalImage.width;
+    const whRatio = clientWidth / clientHeight; // Get the ratio of width to height
+
+    const containerWidth = this.state.containerWidth,
+      containerHeight = this.state.containerHeight;
+    let height;
+    if (whRatio > 1) {
+      // Image viewport is more wider than it is taller
+      height = containerWidth / whRatio;
+      //   width = containerWidth + "px";
+    } else {
+      height = containerHeight;
+      //   width = containerHeight * whRatio;
+      //   width = width + "px";
+    }
+
+    const calculatedProperties = this.getImageProperties(
+      clientHeight,
+      clientWidth,
+      containerWidth,
+      containerHeight
+    );
+
+    this.setState({
+      imgRotation,
+      imageHeight: calculatedProperties.height + "px"
+    });
+  };
+
+  /**
+   * Return the "object-fit" property value for the image
+   */
+  getImageFit: (width?: number, height?: number, limit?: number) => string = (
+    width,
+    height,
+    limit
+  ) => {
+    width = width || this.state.image.naturalWidth;
+    height = height || this.state.image.naturalHeight;
+
+    // The bounding rectangle for the image relative to which the image sie is compared
+    limit = limit || this.state.containerWidth;
+    return width >= height && width < limit ? "contain" : "scale-down";
+  };
+
+  getImageProperties: (
+    width: number,
+    height: number,
+    widthLimit: number,
+    heightLimit: number
+  ) => {
+    width: number;
+    height: number | null;
+  } = (width, height, widthLimit, heightLimit) => {
+    const whRatio = width / height;
+    let calculatedWidth, calculatedHeight;
+    if (whRatio > 1) {
+      calculatedHeight = widthLimit / whRatio;
+      calculatedWidth = widthLimit;
+    } else {
+      calculatedWidth = heightLimit * whRatio;
+      calculatedHeight = heightLimit;
+      //   calculatedWidth = width;
+    }
+
+    if (calculatedHeight < heightLimit) {
+      calculatedHeight = heightLimit;
+    }
+
+    return {
+      width: calculatedWidth,
+      height: calculatedHeight
+    };
   };
 
   /**
@@ -158,6 +332,13 @@ export default class ImageViewer extends React.Component<
     const whRatio = originalImageWidth / originalImageHeight; // Get the ratio of width to height
     const containerWidth = this.state.containerWidth,
       containerHeight = this.state.containerHeight;
+    const calculatedProperties = this.getImageProperties(
+      originalImageWidth,
+      originalImageHeight,
+      containerWidth,
+      containerHeight
+    );
+
     let width, height;
     if (whRatio > 1) {
       // Image is more wider than it is taller
@@ -175,9 +356,14 @@ export default class ImageViewer extends React.Component<
 
     this.setState(
       {
-        imageWidth: width,
-        imageHeight: height,
-        image: originalImage
+        imageWidth: calculatedProperties.width + "px",
+        imageHeight: containerHeight > originalImageHeight ? calculatedProperties.height + "px": this.state.imageHeight,
+        image: originalImage,
+        imageFit: this.getImageFit(
+          originalImageWidth,
+          originalImageHeight,
+          containerWidth
+        )
       },
       function() {
         console.log("Original Image should have been set");
@@ -185,23 +371,30 @@ export default class ImageViewer extends React.Component<
     );
   };
 
-  /**
-   * Rotate functionality of the viewer
-   */
   render() {
     let styles = Object.assign({}, imageStyle, {
       width: this.state.imageWidth,
       height: this.state.imageHeight,
-      transform: `rotate(${this.state.imgRotation}deg)`
+      transform: `rotate(${this.state.imgRotation}deg)`,
+      objectFit: this.state.imageFit || undefined,
+    //   left: this.state.imageX + "px" || undefined
     });
     return (
       <div>
         <div className={"toolbar"}>
           <div style={{ display: "block", margin: "0 auto", width: "54%" }}>
-            <button onClick={this.zoomIn} className={"toolbar-button"}>
+            <button
+              onClick={this.zoomIn}
+              className={"toolbar-button"}
+              disabled={this.state.btnZoomIn === BUTTON_STATES.disabled}
+            >
               Zoom In
             </button>
-            <button onClick={this.zoomOut} className={"toolbar-button"}>
+            <button
+              onClick={this.zoomOut}
+              className={"toolbar-button"}
+              disabled={this.state.btnZoomOut === BUTTON_STATES.disabled}
+            >
               Zoom Out
             </button>
             <button onClick={this.rotate} className={"toolbar-button"}>

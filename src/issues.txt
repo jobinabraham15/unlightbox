@@ -1,0 +1,3 @@
+Issues : 
+1. Image on lengthwise rotation movement
+2. Top margin issues to be resolved
