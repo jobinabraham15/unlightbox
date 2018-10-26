@@ -10,6 +10,6 @@ const mockUrls = [
 ];
 
 ReactDOM.render(
-  <ImageViewer url={mockUrls[0]} />,
+  <Unlightbox url={mockUrls[2]} width={600} height={400}/>,
   document.getElementById("root")
 );

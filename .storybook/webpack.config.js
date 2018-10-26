@@ -14,13 +14,17 @@ const TsDocPlugin = require("react-docgen-typescript-webpack-plugin"); // option
 
 module.exports = {
   resolve: {
-    extensions: [".tsx", ".js", ".json"]
+    extensions: [".tsx", ".js", ".json", ".ts", ".css"]
   },
   module: {
     rules: [
       {
         test: /\.(ts|tsx|jsx)?$/,
         use: [{ loader: "babel-loader" }, { loader: "ts-loader" }]
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"]
       }
     ]
   },

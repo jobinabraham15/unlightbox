@@ -8,17 +8,17 @@ interface IDraggableProps {
   /**
    * width of the outer most container which will contain the draggable container
    */
-  width: number;
+  outerWidth: number;
 
   /**
    * height of the outer most container which will contain the draggable container
    */
-  height: number;
+  outerheight: number;
 
   /**
    * Any CSS styles
    */
-  style: React.CSSProperties;
+  innerStyle?: React.CSSProperties;
 }
 
 /**
@@ -136,9 +136,8 @@ export default class Draggable extends React.Component<
   };
 
   render() {
-      
     // Create style object based on the positions calculated
-    let style = Object.assign({}, this.props.style, {
+    let style = Object.assign({}, this.props.InnerStyle, {
       left: this.state.posX,
       top: this.state.posY,
       position: "absolute",
@@ -151,9 +150,8 @@ export default class Draggable extends React.Component<
       <div
         style={{
           position: "relative",
-          width: this.props.width + "px",
-          height: this.props.width + "px",
-          border: "1px solid red",
+          width: this.props.OuterWidth + "px",
+          height: this.props.Outerheight + "px",
           overflow: "auto"
         }}
       >
