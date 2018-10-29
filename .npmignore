@@ -3,3 +3,6 @@ stories/
 demo/
 .vscode/
 .cache/
+webpack*
+babel*
+src/
