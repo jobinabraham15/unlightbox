@@ -19,6 +19,8 @@ interface IDraggableProps {
    * Any CSS styles
    */
   innerStyle?: React.CSSProperties;
+
+  containerStyle?: React.CSSProperties;
 }
 
 /**
@@ -137,7 +139,7 @@ export default class Draggable extends React.Component<
 
   render() {
     // Create style object based on the positions calculated
-    let style = Object.assign({}, this.props.InnerStyle, {
+    let style = Object.assign({}, this.props.innerStyle, {
       left: this.state.posX,
       top: this.state.posY,
       position: "absolute",
@@ -146,14 +148,16 @@ export default class Draggable extends React.Component<
       marginRight: 0
     });
 
+    let outerStyles = Object.assign({}, this.props.containerStyle, {
+      position: "relative",
+      width: this.props.outerWidth + "px",
+      height: this.props.outerheight + "px",
+      overflow: "auto"
+    });
+
     return (
       <div
-        style={{
-          position: "relative",
-          width: this.props.OuterWidth + "px",
-          height: this.props.Outerheight + "px",
-          overflow: "auto"
-        }}
+        style={outerStyles}
       >
         <div
           onMouseDown={this.onMouseDown}

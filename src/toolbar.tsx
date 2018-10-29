@@ -8,18 +8,26 @@ interface IToolbarProps {
   zoominState?: any; // convert to Button state after export
   zoomoutState?: any;
   rotateState?: any;
+  style?: React.CSSProperties;
+  className?: string;
 }
 
 export default class Toolbar extends React.Component<IToolbarProps> {
   render() {
+    const userDefinedClass = this.props.className
+      ? " " + this.props.className
+      : "";
     return (
-      <div className={"toolbar"}>
-        <div style={{ display: "block", margin: "0 auto", width: "54%" }}>
+      <div
+        className={`unlightbox-toolbar${userDefinedClass}`}
+        style={this.props.style}
+      >
+        <div className={"btn-group"}>
           <button
             onClick={e => {
               this.props.onZoomIn(e);
             }}
-            className={"toolbar-button"}
+            className={"toolbar-btn"}
             disabled={this.props.zoominState === BUTTON_STATES.disabled}
           >
             Zoom In
@@ -28,7 +36,7 @@ export default class Toolbar extends React.Component<IToolbarProps> {
             onClick={e => {
               this.props.onZoomOut(e);
             }}
-            className={"toolbar-button"}
+            className={"toolbar-btn"}
             disabled={this.props.zoomoutState === BUTTON_STATES.disabled}
           >
             Zoom Out
@@ -37,7 +45,7 @@ export default class Toolbar extends React.Component<IToolbarProps> {
             onClick={e => {
               this.props.onRotate(e);
             }}
-            className={"toolbar-button"}
+            className={"toolbar-btn"}
           >
             Rotate
           </button>

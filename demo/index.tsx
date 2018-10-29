@@ -1,7 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import Unlightbox from "../src/unlightbox";
-import ImageViewer from "../src/imageViewer";
 
 const mockUrls = [
   "https://s3-ap-southeast-1.amazonaws.com/aasaan-staffing/media/1526383682703_32089704_2238673263021287_745264885570469888_n.jpg",
@@ -10,6 +9,6 @@ const mockUrls = [
 ];
 
 ReactDOM.render(
-  <Unlightbox url={mockUrls[2]} width={600} height={400}/>,
+  <Unlightbox url={mockUrls[0]} containerStyle={{border: "1px solid black", background: "repeating-linear-gradient(45deg,#ffffff,#dedede 1px,#f7f7f7 2px,#e4e4e6 1px)"}} containerWidth={400} containerHeight = {400}/>,
   document.getElementById("root")
 );

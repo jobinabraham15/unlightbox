@@ -10,3 +10,35 @@
   cursor: -moz-grabbing;
   cursor: -webkit-grabbing;
 }
+
+.unlightbox-toolbar {
+  background: #e8e8e8;
+  padding: 10px 0 10px 0;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+}
+
+.unlightbox-toolbar .btn-group {
+  display: block;
+  margin: 0 auto;
+  width: 54%;
+  text-align: center;
+}
+
+.unlightbox-toolbar .btn-group > .toolbar-btn {
+  background: black;
+  opacity: 1;
+  color: white;
+  box-shadow: none;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.unlightbox-toolbar .btn-group > .toolbar-btn:disabled {
+  background: #8a8a8a;
+  border: #474748;
+  cursor: not-allowed;
+}
+
