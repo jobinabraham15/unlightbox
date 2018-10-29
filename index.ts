@@ -1,2 +1,2 @@
-var unlighbox = require('./src/unlightbox');
-module.exports = unlighbox;
+import {Unlightbox} from "./src/index";
+export default Unlightbox;

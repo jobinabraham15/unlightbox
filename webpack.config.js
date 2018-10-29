@@ -1,7 +1,7 @@
 const path = require("path");
 module.exports = {
   entry: {
-    index: "./src/index.ts",
+    index: "./index.ts",
     // demo: "./demo/index.tsx"
   },
   output: {

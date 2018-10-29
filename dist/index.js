@@ -81,10 +81,22 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.ts");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./index.ts");
 /******/ })
 /************************************************************************/
 /******/ ({
+
+/***/ "./index.ts":
+/*!******************!*\
+  !*** ./index.ts ***!
+  \******************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _src_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./src/index */ \"./src/index.ts\");\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (_src_index__WEBPACK_IMPORTED_MODULE_0__[\"Unlightbox\"]);\n\n//# sourceURL=webpack:///./index.ts?");
+
+/***/ }),
 
 /***/ "./node_modules/css-loader/index.js!./src/index.css":
 /*!*************************************************!*\
@@ -241,11 +253,11 @@ eval("\nvar content = __webpack_require__(/*! !../node_modules/css-loader!./inde
 /*!**********************!*\
   !*** ./src/index.ts ***!
   \**********************/
-/*! exports provided: Draggable, Toolbar, Unlightbox, default, BUTTON_STATES */
+/*! exports provided: Draggable, Toolbar, Unlightbox, BUTTON_STATES */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _unlightbox__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./unlightbox */ \"./src/unlightbox.tsx\");\n/* harmony import */ var _draggable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./draggable */ \"./src/draggable.tsx\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"Draggable\", function() { return _draggable__WEBPACK_IMPORTED_MODULE_1__[\"default\"]; });\n\n/* harmony import */ var _toolbar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./toolbar */ \"./src/toolbar.tsx\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"Toolbar\", function() { return _toolbar__WEBPACK_IMPORTED_MODULE_2__[\"default\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"Unlightbox\", function() { return _unlightbox__WEBPACK_IMPORTED_MODULE_0__[\"default\"]; });\n\n/* harmony import */ var _buttons_enums__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./buttons.enums */ \"./src/buttons.enums.ts\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"BUTTON_STATES\", function() { return _buttons_enums__WEBPACK_IMPORTED_MODULE_3__[\"BUTTON_STATES\"]; });\n\n\n\n\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (_unlightbox__WEBPACK_IMPORTED_MODULE_0__[\"default\"]);\n\n//# sourceURL=webpack:///./src/index.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _draggable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./draggable */ \"./src/draggable.tsx\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"Draggable\", function() { return _draggable__WEBPACK_IMPORTED_MODULE_0__[\"default\"]; });\n\n/* harmony import */ var _toolbar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./toolbar */ \"./src/toolbar.tsx\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"Toolbar\", function() { return _toolbar__WEBPACK_IMPORTED_MODULE_1__[\"default\"]; });\n\n/* harmony import */ var _unlightbox__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./unlightbox */ \"./src/unlightbox.tsx\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"Unlightbox\", function() { return _unlightbox__WEBPACK_IMPORTED_MODULE_2__[\"default\"]; });\n\n/* harmony import */ var _buttons_enums__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./buttons.enums */ \"./src/buttons.enums.ts\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"BUTTON_STATES\", function() { return _buttons_enums__WEBPACK_IMPORTED_MODULE_3__[\"BUTTON_STATES\"]; });\n\n\n\n\n\n\n//# sourceURL=webpack:///./src/index.ts?");
 
 /***/ }),
 
