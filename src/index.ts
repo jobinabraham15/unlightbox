@@ -1,4 +1,4 @@
-var Unlightbox = require('./unlightbox');
+import Unlightbox from "./unlightbox"
 
 export {default as Draggable} from "./draggable";
 export {default as Toolbar} from "./toolbar";
@@ -9,4 +9,4 @@ export * from "./toolbar.interface";
 export * from "./buttons.enums";
 export * from "./buttons.interface";
 
-module.exports = Unlightbox;
+export default Unlightbox;
