@@ -1,6 +1,6 @@
 {
   "name": "unlightbox",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A simple image viewer for react which does not add any extra UI like modals.",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
