@@ -3,12 +3,17 @@
         "module": "esnext",
         "jsx": "preserve",
         "target": "es2015",
-        "rootDirs": ["src", "stories"]
+        "rootDirs": ["src", "stories"],
+        "declaration": true,
+        "declarationDir": "dist/types/",
+        "outDir": "dist/",
     },
     "include": [
-        "src/**/*"
+        "src/**/*",
     ],
     "exclude": [
-        "node_modules"
+        "node_modules",
+        "**/*.interface.ts",
+        "**/*.d.ts"
     ]
 }

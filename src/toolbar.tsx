@@ -1,16 +1,5 @@
 import * as React from "react";
-import { BUTTON_STATES } from "./buttons.enums";
-
-interface IToolbarProps {
-  onZoomIn: Function;
-  onZoomOut: Function;
-  onRotate: Function;
-  zoominState?: any; // convert to Button state after export
-  zoomoutState?: any;
-  rotateState?: any;
-  style?: React.CSSProperties;
-  className?: string;
-}
+import { IToolbarProps, BUTTON_STATES } from "./index";
 
 export default class Toolbar extends React.Component<IToolbarProps> {
   render() {

@@ -1,8 +1,8 @@
 const path = require("path");
 module.exports = {
   entry: {
-    main: "./src/unlightbox.tsx",
-    demo: "./demo/index.tsx"
+    index: "./src/index.ts",
+    // demo: "./demo/index.tsx"
   },
   output: {
     filename: "[name].js",
@@ -19,7 +19,8 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(ts|tsx|jsx)?$/,
+        // test: /\.(ts|tsx|jsx)?$/,
+        test:/^(?!.*interface\.ts).*\.(ts|tsx|jsx)?$/,
         use: [{ loader: "babel-loader" }, { loader: "ts-loader" }]
       },
       {
