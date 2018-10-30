@@ -1,12 +1,15 @@
 const path = require("path");
 module.exports = {
   entry: {
-    index: "./src/unlightbox.tsx",
+    index: "./index.ts",
     // demo: "./demo/index.tsx"
   },
   output: {
     filename: "[name].js",
-    path: __dirname + "/dist"
+    path: __dirname + "/dist",
+    libraryTarget: 'umd',
+    library: 'Unlightbox',
+    umdNamedDefine: true
   },
   devServer: {
     contentBase: path.join(__dirname + "dist"),
