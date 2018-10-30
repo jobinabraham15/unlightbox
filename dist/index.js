@@ -81,22 +81,10 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./index.ts");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/unlightbox.tsx");
 /******/ })
 /************************************************************************/
 /******/ ({
-
-/***/ "./index.ts":
-/*!******************!*\
-  !*** ./index.ts ***!
-  \******************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _src_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./src/index */ \"./src/index.ts\");\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (_src_index__WEBPACK_IMPORTED_MODULE_0__[\"Unlightbox\"]);\n\n//# sourceURL=webpack:///./index.ts?");
-
-/***/ }),
 
 /***/ "./node_modules/css-loader/index.js!./src/index.css":
 /*!*************************************************!*\

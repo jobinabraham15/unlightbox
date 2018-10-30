@@ -1,7 +1,7 @@
 const path = require("path");
 module.exports = {
   entry: {
-    index: "./index.ts",
+    index: "./src/unlightbox.tsx",
     // demo: "./demo/index.tsx"
   },
   output: {
