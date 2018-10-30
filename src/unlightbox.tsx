@@ -1,6 +1,6 @@
-import  * as React from "react";
+import * as React from "react";
 import { imageLoad } from "./imageLoad";
-import {IUnlightboxProps, UnlightboxState } from "./unlightbox.interface";
+import { IUnlightboxProps, UnlightboxState } from "./unlightbox.interface";
 import { BUTTON_STATES } from "./buttons.enums";
 import Toolbar from "./toolbar";
 import Draggable from "./draggable";
@@ -24,12 +24,22 @@ export default class Unlightbox extends React.Component<
     super(props);
     this.state = this.getInitialStates();
   }
+
   componentDidMount() {
     /**
      * Start loading the image once the component is mounted
      */
     this.loadImage();
   }
+  
+  componentDidUpdate(prevProps: IUnlightboxProps) {
+    if (prevProps.url !== this.props.url) {
+      this.setState(this.getInitialStates(), () => {
+        this.loadImage();
+      });
+    }
+  }
+
   /**
    * Get the initial state values for this components states
    */
