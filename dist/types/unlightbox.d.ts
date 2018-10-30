@@ -7,6 +7,7 @@ export default class Unlightbox extends React.Component<IUnlightboxProps, Unligh
     originalImage: any;
     constructor(props: IUnlightboxProps);
     componentDidMount(): void;
+    componentDidUpdate(prevProps: IUnlightboxProps): void;
     /**
      * Get the initial state values for this components states
      */
