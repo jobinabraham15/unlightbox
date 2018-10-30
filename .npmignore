@@ -6,3 +6,4 @@ demo/
 webpack*
 babel*
 src/
+index.ts
