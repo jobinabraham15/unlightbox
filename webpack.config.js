@@ -12,7 +12,7 @@ module.exports = {
     contentBase: path.join(__dirname + "dist"),
     port: "8080"
   },
-  mode: "development",
+  mode: "production",
   resolve: {
     extensions: [".tsx", ".ts", ".js", ".json", ".css"]
   },
