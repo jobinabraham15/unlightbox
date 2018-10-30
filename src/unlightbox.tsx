@@ -33,7 +33,6 @@ export default class Unlightbox extends React.Component<
   }
   
   componentDidUpdate(prevProps: IUnlightboxProps) {
-    console.log("updated component");
     if (prevProps.url !== this.props.url) {
       this.setState(this.getInitialStates(), () => {
         this.loadImage();
