@@ -1,6 +1,6 @@
-import  * as React from "react";
+import * as React from "react";
 import { imageLoad } from "./imageLoad";
-import {IUnlightboxProps, UnlightboxState } from "./unlightbox.interface";
+import { IUnlightboxProps, UnlightboxState } from "./unlightbox.interface";
 import { BUTTON_STATES } from "./buttons.enums";
 import Toolbar from "./toolbar";
 import Draggable from "./draggable";
@@ -259,15 +259,19 @@ export default class Unlightbox extends React.Component<
               outerheight={this.state.containerHeight}
             >
               {!this.state.image ? (
-                <h1
-                  style={{
-                    color: "#969696",
-                    textAlign: "center",
-                    marginTop: "30px"
-                  }}
-                >
-                  <div>{"Loading your image"}</div>
-                </h1>
+                !this.props.loader ? (
+                  <h1
+                    style={{
+                      color: "#969696",
+                      textAlign: "center",
+                      marginTop: "30px"
+                    }}
+                  >
+                    <div>{"Loading your image"}</div>
+                  </h1>
+                ) : (
+                  this.props.loader
+                )
               ) : (
                 <img
                   style={styles}

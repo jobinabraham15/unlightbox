@@ -9,6 +9,6 @@ const mockUrls = [
 ];
 console.log("Unlightbox", Unlightbox);
 ReactDOM.render(
-  <Unlightbox url={mockUrls[0]} containerStyle={{border: "1px solid black", background: "repeating-linear-gradient(45deg,#ffffff,#dedede 1px,#f7f7f7 2px,#e4e4e6 1px)"}} containerWidth={400} containerHeight = {400}/>,
+  <Unlightbox url={mockUrls[0]} containerStyle={{border: "1px solid black", background: "repeating-linear-gradient(45deg,#ffffff,#dedede 1px,#f7f7f7 2px,#e4e4e6 1px)"}} containerWidth={400} containerHeight = {400} loader={<div>Jobin</div>}/>,
   document.getElementById("root")
 );
