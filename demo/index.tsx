@@ -10,7 +10,7 @@ const mockUrls = [
 
 class Demo extends React.Component {
   state = {
-    url: mockUrls[2]
+    url: mockUrls[1]
   };
 
   render() {

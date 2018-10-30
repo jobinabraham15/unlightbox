@@ -31,7 +31,7 @@ export default class Unlightbox extends React.Component<
      */
     this.loadImage();
   }
-  
+
   componentDidUpdate(prevProps: IUnlightboxProps) {
     if (prevProps.url !== this.props.url) {
       this.setState(this.getInitialStates(), () => {
@@ -55,7 +55,8 @@ export default class Unlightbox extends React.Component<
     containerHeight: this.props.containerHeight || 300,
     imgRotation: 0,
     imageFit: "scale-down",
-    scale: 1
+    scale: 1,
+    scaleFactor: this.props.scaleFactor || 0.25
   });
 
   /**
@@ -115,9 +116,13 @@ export default class Unlightbox extends React.Component<
    * Zooming in functionality of the viewer
    */
   protected zoomIn = () => {
+    const scale = this.state.scale + (this.state.scaleFactor);
+    if (scale > this.state.scaleFactor) {
+      this.enableZoomOut();
+    }
     // Zoom
     this.setState({
-      scale: this.state.scale + (this.props.scaleFactor || 0.25)
+      scale
     });
   };
 
@@ -125,9 +130,18 @@ export default class Unlightbox extends React.Component<
    * Zooming out functionality of the viewer
    */
   protected zoomOut = () => {
-    this.setState({
-      scale: this.state.scale - (this.props.scaleFactor || 0.25)
-    });
+    if (this.state.scale > this.state.scaleFactor) {
+      this.setState(
+        {
+          scale: this.state.scale - (this.state.scaleFactor)
+        },
+        () => {
+          console.log("this.state.scale");
+        }
+      );
+    } else {
+      this.disableZoomOut();
+    }
   };
 
   /**
@@ -253,6 +267,8 @@ export default class Unlightbox extends React.Component<
             onZoomIn={this.zoomIn}
             onZoomOut={this.zoomOut}
             onRotate={this.rotate}
+            zoominState={this.state.zoomInState}
+            zoomoutState={this.state.zoomOutState}
             style={tbStyles}
           />
         </div>

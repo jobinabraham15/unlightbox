@@ -114,6 +114,8 @@ interface IImageInternalStates<T> {
    */
   scale: number;
 
+  scaleFactor?: number;
+
   /**
    * State of the zoomin Buttons
    */
