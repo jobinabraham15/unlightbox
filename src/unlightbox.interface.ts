@@ -1,4 +1,5 @@
 import { ViewerButtonStates } from "./buttons.interface";
+import { ReactElement } from "react";
 export { UnlightboxState, IUnlightboxProps };
 
 interface IUnlightboxProps {
@@ -43,13 +44,18 @@ interface IUnlightboxProps {
   toolbarClass?: string;
 
   /**
-   *
+   * Icon Components for the buttons
    */
   buttonIcons?: {
     zoomIn?: React.Component;
     zoomOut?: React.Component;
     rotate?: React.Component;
   };
+
+  /**
+   * Loader component to be displayed while image is loading
+   */
+  loader?: React.Component | React.ReactElement<HTMLElement>;
 }
 
 interface IImageInternalStates<T> {
