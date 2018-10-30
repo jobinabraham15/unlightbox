@@ -7,8 +7,28 @@ const mockUrls = [
   "https://s3-ap-southeast-1.amazonaws.com/aasaan-staffing/media/generic/1539693017765/1534050014668_IMG_20180812_102949.jpg",
   "http://homeaquaria.com/wp-content/uploads/2013/06/4Danios1.jpg"
 ];
-console.log("Unlightbox", Unlightbox);
-ReactDOM.render(
-  <Unlightbox url={mockUrls[0]} containerStyle={{border: "1px solid black", background: "repeating-linear-gradient(45deg,#ffffff,#dedede 1px,#f7f7f7 2px,#e4e4e6 1px)"}} containerWidth={400} containerHeight = {400}/>,
-  document.getElementById("root")
-);
+
+class Demo extends React.Component {
+  state = {
+    url: mockUrls[2]
+  };
+
+  render() {
+    return (
+      <>
+        <Unlightbox
+          url={this.state.url}
+          containerStyle={{
+            border: "1px solid black",
+            background:
+              "repeating-linear-gradient(45deg,#ffffff,#dedede 1px,#f7f7f7 2px,#e4e4e6 1px)"
+          }}
+          containerWidth={400}
+          containerHeight={400}
+        />
+      </>
+    );
+  }
+}
+
+ReactDOM.render(<Demo />, document.getElementById("root"));
