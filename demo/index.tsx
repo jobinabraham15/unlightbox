@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import Unlightbox from "../dist/index";
+import Unlightbox from "../src/unlightbox";
 
 const mockUrls = [
   "https://s3-ap-southeast-1.amazonaws.com/aasaan-staffing/media/1526383682703_32089704_2238673263021287_745264885570469888_n.jpg",

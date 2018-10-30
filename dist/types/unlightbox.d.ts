@@ -1,9 +1,9 @@
-import { Component } from "react";
+import * as React from "react";
 import { IUnlightboxProps, UnlightboxState } from "./unlightbox.interface";
 /**
  * Component that is responsible for displaying the image and the toolbar associated with it.
  */
-export default class Unlightbox extends Component<IUnlightboxProps, UnlightboxState> {
+export default class Unlightbox extends React.Component<IUnlightboxProps, UnlightboxState> {
     originalImage: any;
     constructor(props: IUnlightboxProps);
     componentDidMount(): void;

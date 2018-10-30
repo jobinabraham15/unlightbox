@@ -1,4 +1,3 @@
-import {CSSProperties} from "react";
 /**
  * Type declaration for position cordinates
  */
@@ -21,9 +20,9 @@ export interface IDraggableProps {
   /**
    * Any CSS styles
    */
-  innerStyle?: CSSProperties;
+  innerStyle?: React.CSSProperties;
 
-  containerStyle?: CSSProperties;
+  containerStyle?: React.CSSProperties;
 }
 
 /**

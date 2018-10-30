@@ -1,4 +1,4 @@
-import { Component, createRef } from "react";
+import * as React from "react";
 import "./index.css";
 import {
   IDraggableProps,
@@ -6,7 +6,7 @@ import {
   positionCordinates
 } from "./draggable.interface";
 
-export default class Draggable extends Component<
+export default class Draggable extends React.Component<
   IDraggableProps,
   IDraggableState<positionCordinates>
 > {
@@ -14,7 +14,7 @@ export default class Draggable extends Component<
   constructor(props: IDraggableProps) {
     super(props);
     this.state = this.getInitialState();
-    this.containerRef = createRef();
+    this.containerRef = React.createRef();
   }
 
   /**

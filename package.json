@@ -10,7 +10,8 @@
     "storybook": "start-storybook -p 6006 -c .storybook",
     "watch": "webpack -w",
     "serve": "npm run watch | npm run start",
-    "build": "webpack --config webpack.prod.js"
+    "build": "webpack --config webpack.prod.js",
+    "demo": " webpack-dev-server --open --config webpack.demo.js"
   },
   "repository": {
     "type": "git",

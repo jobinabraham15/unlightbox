@@ -1,4 +1,4 @@
-import  { Component, createRef } from "react";
+import  * as React from "react";
 import { imageLoad } from "./imageLoad";
 import {IUnlightboxProps, UnlightboxState } from "./unlightbox.interface";
 import { BUTTON_STATES } from "./buttons.enums";
@@ -15,7 +15,7 @@ const imageStyle = {
 /**
  * Component that is responsible for displaying the image and the toolbar associated with it.
  */
-export default class Unlightbox extends Component<
+export default class Unlightbox extends React.Component<
   IUnlightboxProps,
   UnlightboxState
 > {
@@ -34,8 +34,8 @@ export default class Unlightbox extends Component<
    * Get the initial state values for this components states
    */
   private getInitialStates = () => ({
-    imageRef: createRef(),
-    dragableContainerRef: createRef(),
+    imageRef: React.createRef(),
+    dragableContainerRef: React.createRef(),
     zoomInState: BUTTON_STATES.active,
     zoomOutState: BUTTON_STATES.active,
     image: null,

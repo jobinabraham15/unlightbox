@@ -1,9 +1,8 @@
 const path = require("path");
 
-
 module.exports = {
   entry: {
-    index: "./src/index.ts",
+    demo: "./demo/index.tsx",
   },
   output: {
     filename: "[name].js",
@@ -24,5 +23,13 @@ module.exports = {
         use: ["style-loader", "css-loader"]
       }
     ]
-  }
+  },
+  mode: "production",
+  output: {
+    filename: "[name].js",
+    path: __dirname + "/dist",
+    libraryTarget: "umd",
+    library: "Unlightbox",
+    umdNamedDefine: true
+  },
 };
