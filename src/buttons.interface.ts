@@ -1,4 +1,4 @@
-import { BUTTON_STATES } from "./index";
+import { BUTTON_STATES } from "./buttons.enums";
 
 export type ViewerButtonStates = BUTTON_STATES.active | BUTTON_STATES.disabled | null;
 

@@ -1,1 +1,2 @@
-declare var Unlightbox: any;
+import Unlightbox from "./unlightbox";
+export default Unlightbox;

@@ -1,7 +1,7 @@
 const path = require("path");
 module.exports = {
   entry: {
-    index: "./index.ts",
+    index: "./src/index.ts",
     // demo: "./demo/index.tsx"
   },
   output: {
@@ -24,7 +24,7 @@ module.exports = {
       {
         // test: /\.(ts|tsx|jsx)?$/,
         test:/^(?!.*interface\.ts).*\.(ts|tsx|jsx)?$/,
-        use: [{ loader: "babel-loader" }, { loader: "ts-loader" }]
+        use: [{ loader: "babel-loader" }, { loader: "ts-loader" }],
       },
       {
         test: /\.css$/,

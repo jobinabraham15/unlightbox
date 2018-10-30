@@ -1,5 +1,6 @@
 import * as React from "react";
-import { IToolbarProps, BUTTON_STATES } from "./index";
+import { IToolbarProps } from "./toolbar.interface";
+import { BUTTON_STATES } from "./buttons.enums";
 
 export default class Toolbar extends React.Component<IToolbarProps> {
   render() {

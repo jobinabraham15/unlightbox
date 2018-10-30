@@ -1,5 +1,5 @@
 import * as React from "react";
-import { IUnlightboxProps, UnlightboxState } from "./index";
+import { IUnlightboxProps, UnlightboxState } from "./unlightbox.interface";
 /**
  * Component that is responsible for displaying the image and the toolbar associated with it.
  */

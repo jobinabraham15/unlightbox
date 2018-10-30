@@ -1,12 +1,9 @@
 import * as React from "react";
 import { imageLoad } from "./imageLoad";
-import {
-  Draggable,
-  IUnlightboxProps,
-  UnlightboxState,
-  BUTTON_STATES,
-  Toolbar
-} from "./index";
+import {IUnlightboxProps, UnlightboxState } from "./unlightbox.interface";
+import { BUTTON_STATES } from "./buttons.enums";
+import Toolbar from "./toolbar";
+import Draggable from "./draggable";
 
 const imageStyle = {
   objectFit: "scale-down",
