@@ -1,7 +1,7 @@
-import * as React from "react";
+import { Component } from "react";
 import "./index.css";
 import { IDraggableProps, IDraggableState, positionCordinates } from "./draggable.interface";
-export default class Draggable extends React.Component<IDraggableProps, IDraggableState<positionCordinates>> {
+export default class Draggable extends Component<IDraggableProps, IDraggableState<positionCordinates>> {
     containerRef: any;
     constructor(props: IDraggableProps);
     /**

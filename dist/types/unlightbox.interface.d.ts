@@ -1,5 +1,5 @@
-/// <reference types="react" />
 import { ViewerButtonStates } from "./buttons.interface";
+import { CSSProperties, Component } from "react";
 export { UnlightboxState, IUnlightboxProps };
 interface IUnlightboxProps {
     /**
@@ -29,7 +29,7 @@ interface IUnlightboxProps {
     /**
      * Styles to be applied to toolbar
      */
-    toolbarStyle?: React.CSSProperties;
+    toolbarStyle?: CSSProperties;
     /**
      * Tool bar class name if any
      */
@@ -38,9 +38,9 @@ interface IUnlightboxProps {
      *
      */
     buttonIcons?: {
-        zoomIn?: React.Component;
-        zoomOut?: React.Component;
-        rotate?: React.Component;
+        zoomIn?: Component;
+        zoomOut?: Component;
+        rotate?: Component;
     };
 }
 interface IImageInternalStates<T> {
@@ -71,7 +71,7 @@ interface IImageInternalStates<T> {
     /**
      * Style properties for container holding the image
      */
-    containerStyle?: React.CSSProperties;
+    containerStyle?: CSSProperties;
     /**
      * The image DOM object
      */

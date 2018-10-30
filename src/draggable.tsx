@@ -1,8 +1,12 @@
-import * as React from "react";
+import { Component, createRef } from "react";
 import "./index.css";
-import {IDraggableProps, IDraggableState, positionCordinates} from "./draggable.interface";
+import {
+  IDraggableProps,
+  IDraggableState,
+  positionCordinates
+} from "./draggable.interface";
 
-export default class Draggable extends React.Component<
+export default class Draggable extends Component<
   IDraggableProps,
   IDraggableState<positionCordinates>
 > {
@@ -10,7 +14,7 @@ export default class Draggable extends React.Component<
   constructor(props: IDraggableProps) {
     super(props);
     this.state = this.getInitialState();
-    this.containerRef = React.createRef();
+    this.containerRef = createRef();
   }
 
   /**
@@ -100,9 +104,7 @@ export default class Draggable extends React.Component<
     });
 
     return (
-      <div
-        style={outerStyles}
-      >
+      <div style={outerStyles}>
         <div
           onMouseDown={this.onMouseDown}
           onMouseMove={this.onMouseMove}

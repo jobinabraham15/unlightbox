@@ -1,8 +1,8 @@
-import * as React from "react";
+import { Component } from "react";
 import { IToolbarProps } from "./toolbar.interface";
 import { BUTTON_STATES } from "./buttons.enums";
 
-export default class Toolbar extends React.Component<IToolbarProps> {
+export default class Toolbar extends Component<IToolbarProps> {
   render() {
     const userDefinedClass = this.props.className
       ? " " + this.props.className
