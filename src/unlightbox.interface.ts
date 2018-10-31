@@ -1,5 +1,6 @@
 import { ViewerButtonStates } from "./buttons.interface";
 import { ReactElement } from "react";
+import { IToolbarIconProps } from "./toolbar.interface";
 export { UnlightboxState, IUnlightboxProps };
 
 interface IUnlightboxProps {
@@ -46,11 +47,7 @@ interface IUnlightboxProps {
   /**
    * Icon Components for the buttons
    */
-  buttonIcons?: {
-    zoomIn?: React.Component;
-    zoomOut?: React.Component;
-    rotate?: React.Component;
-  };
+  buttonIcons?: IToolbarIconProps
 
   /**
    * Loader component to be displayed while image is loading
@@ -113,6 +110,8 @@ interface IImageInternalStates<T> {
    * The current scale of the image
    */
   scale: number;
+
+  scaleFactor?: number;
 
   /**
    * State of the zoomin Buttons
