@@ -9,7 +9,8 @@ const imageStyle = {
   objectFit: "scale-down",
   display: "block",
   margin: "0 auto",
-  position: "relative"
+  position: "relative",
+  transition: "all 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) 0s"
 };
 
 /**
@@ -116,7 +117,7 @@ export default class Unlightbox extends React.Component<
    * Zooming in functionality of the viewer
    */
   protected zoomIn = () => {
-    const scale = this.state.scale + (this.state.scaleFactor);
+    const scale = this.state.scale + this.state.scaleFactor;
     if (scale > this.state.scaleFactor) {
       this.enableZoomOut();
     }
@@ -133,7 +134,7 @@ export default class Unlightbox extends React.Component<
     if (this.state.scale > this.state.scaleFactor) {
       this.setState(
         {
-          scale: this.state.scale - (this.state.scaleFactor)
+          scale: this.state.scale - this.state.scaleFactor
         },
         () => {
           console.log("this.state.scale");
@@ -264,12 +265,13 @@ export default class Unlightbox extends React.Component<
       <>
         <div>
           <Toolbar
-            onZoomIn={this.zoomIn}
-            onZoomOut={this.zoomOut}
+            onZoomin={this.zoomIn}
+            onZoomout={this.zoomOut}
             onRotate={this.rotate}
             zoominState={this.state.zoomInState}
             zoomoutState={this.state.zoomOutState}
             style={tbStyles}
+            icons={this.props.buttonIcons}
           />
         </div>
         <div>
