@@ -15,14 +15,14 @@ export default class ToolbarButton extends React.Component<
         className={"toolbar-btn"}
         disabled={this.props.btnState === BUTTON_STATES.disabled}
       >
-        {this.props.replace ? (
+        {this.props.replace ?  (
+          <span>{this.props.icon}</span>
+        ) :   (
           
           <>
-            <span className={"toolbar-btn-icon"}>{this.props.icon}</span>
             <span>{this.props.title}</span>
+            <span className={"toolbar-btn-icon"}>{this.props.icon}</span>
           </>
-        ) : (
-          <span>{this.props.icon}</span>
         )}
       </button>
     );
