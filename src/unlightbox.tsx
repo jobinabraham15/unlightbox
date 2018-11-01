@@ -150,7 +150,7 @@ export default class Unlightbox extends React.Component<
    */
   protected rotate = () => {
     let imgRotation = this.state.imgRotation;
-    imgRotation = imgRotation >= 270 ? 0 : imgRotation + 90;
+    imgRotation = imgRotation + 90;
 
     const originalImage = this.state.image;
     const clientHeight = originalImage.height;

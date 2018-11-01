@@ -25,11 +25,6 @@ class Demo extends React.Component {
           }}
           containerWidth={400}
           containerHeight={400}
-          buttonIcons={
-            {
-              zoomin: <span>Icon</span>
-            }
-          }
         />
       </>
     );
