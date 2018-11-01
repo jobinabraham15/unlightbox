@@ -31,7 +31,7 @@ export default class Toolbar extends React.Component<IToolbarProps> {
             icon={this.props.icons && this.props.icons.zoomout}
           />
           <ToolbarButton
-            title={"Zoom In"}
+            title={"Rotate"}
             onClick={this.props.onRotate}
             replace={iconShouldReplace}
             icon={this.props.icons && this.props.icons.rotate}

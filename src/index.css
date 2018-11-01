@@ -42,3 +42,7 @@
   cursor: not-allowed;
 }
 
+
+.unlightbox-toolbar .btn-group > .toolbar-btn .toolbar-btn-icon{
+  margin-left: 6px;
+}
