@@ -36,6 +36,14 @@ export default class Toolbar extends React.Component<IToolbarProps> {
             replace={iconShouldReplace}
             icon={this.props.icons && this.props.icons.rotate}
           />
+          {this.props.onDownload ? (
+            <ToolbarButton
+              title={"Download"}
+              onClick={this.props.onDownload}
+              replace={iconShouldReplace}
+              icon={this.props.icons && this.props.icons.download}
+            />
+          ) : null}
         </div>
       </div>
     );
