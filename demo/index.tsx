@@ -3,7 +3,7 @@ import * as ReactDOM from "react-dom";
 import Unlightbox from "../src/unlightbox";
 
 const mockUrls = [
-  "http://homeaquaria.com/wp-content/uploads/2013/06/4Danios1.jpg"
+  "https://www.nps.gov/subjects/fishing/images/303CD5E9-BBC5-B474-08C2A5F62BA899E1Original.jpg"
 ];
 
 class Demo extends React.Component {
@@ -23,6 +23,8 @@ class Demo extends React.Component {
           }}
           containerWidth={400}
           containerHeight={400}
+          saveAs={mockUrls[0].split(":")[0]}
+          downloadable={true}
         />
       </>
     );
