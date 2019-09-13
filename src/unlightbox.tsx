@@ -57,7 +57,8 @@ export default class Unlightbox extends React.Component<
     imgRotation: 0,
     imageFit: "scale-down",
     scale: 1,
-    scaleFactor: this.props.scaleFactor || 0.25
+    scaleFactor: this.props.scaleFactor || 0.25,
+    downloadable: this.props.downloadable || false
   });
 
   /**
@@ -173,6 +174,55 @@ export default class Unlightbox extends React.Component<
   };
 
   /**
+   *
+   * File dowload functionality of the viewer
+   */
+
+  protected makeFile = (data, filename, type) => {
+    let file = new Blob([data], { type: type });
+    if (window.navigator.msSaveOrOpenBlob)
+      // IE10+
+      window.navigator.msSaveOrOpenBlob(file, filename);
+    else {
+      // Others
+      let a = document.createElement("a"),
+        url = URL.createObjectURL(file);
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function() {
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+      }, 0);
+    }
+  };
+
+  protected download = () => {
+    let self = this;
+    let remoteFileUrl = this.props.url;
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", remoteFileUrl, true);
+    xhr.responseType = "blob";
+    xhr.onload = function(e) {
+      if (this.status == 200) {
+        let contentDisp, fileName;
+        let blob = this.response;
+        try {
+          contentDisp = self.props.disposition
+            ? this.getResponseHeader("content-disposition")
+            : null;
+          fileName = contentDisp.split(";")[1].split("=")[1];
+        } catch (e) {
+          fileName = self.props.saveAs ? self.props.saveAs : remoteFileUrl.replace(/^.*[\\\/]/, "");
+        }
+        self.makeFile(blob, fileName, blob.type);
+      }
+    };
+    xhr.send();
+  };
+
+  /**
    * Return the "object-fit" property value for the image
    */
   getImageFit: (width?: number, height?: number, limit?: number) => string = (
@@ -245,9 +295,7 @@ export default class Unlightbox extends React.Component<
     let styles = Object.assign({}, this.props.imageStyles || {}, imageStyle, {
       width: this.state.imageWidth,
       height: this.state.imageHeight,
-      transform: `rotate(${this.state.imgRotation}deg) scale(${
-        this.state.scale
-      })`,
+      transform: `rotate(${this.state.imgRotation}deg) scale(${this.state.scale})`,
       objectFit: this.state.imageFit || undefined
     });
 
@@ -268,6 +316,7 @@ export default class Unlightbox extends React.Component<
             onZoomin={this.zoomIn}
             onZoomout={this.zoomOut}
             onRotate={this.rotate}
+            onDownload={this.state.downloadable ? this.download : null}
             zoominState={this.state.zoomInState}
             zoomoutState={this.state.zoomOutState}
             style={tbStyles}
