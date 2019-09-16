@@ -43,6 +43,19 @@ interface IUnlightboxProps {
      * Loader component to be displayed while image is loading
      */
     loader?: React.Component | React.ReactElement<HTMLElement>;
+    /**
+     * Whether the image is downloadable or not
+     */
+    downloadable?: boolean;
+    /**
+     * Whether the image contains content-disposition header or not.
+     * Can be safely ignored for most of the use cases. If provided, will try to interpret the name of the file
+     */
+    disposition?: boolean;
+    /**
+     * Save the file as name
+     */
+    saveAs?: string;
 }
 interface IImageInternalStates<T> {
     /**
@@ -98,6 +111,10 @@ interface IImageInternalStates<T> {
      * State of the zoomout button
      */
     zoomOutState: ViewerButtonStates;
+    /**
+     * State of downloadable
+     */
+    downloadable: boolean;
 }
 /**
  * Type of Image viewer component

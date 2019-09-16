@@ -33,6 +33,12 @@ export default class Unlightbox extends React.Component<IUnlightboxProps, Unligh
      */
     protected rotate: () => void;
     /**
+     *
+     * File dowload functionality of the viewer
+     */
+    protected makeFile: (data: any, filename: any, type: any) => void;
+    protected download: () => void;
+    /**
      * Return the "object-fit" property value for the image
      */
     getImageFit: (width?: number, height?: number, limit?: number) => string;
