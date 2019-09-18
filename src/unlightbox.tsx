@@ -114,6 +114,29 @@ export default class Unlightbox extends React.Component<
     }
   };
 
+
+  private decodeBlobeResponse = (customBlob, blobType, disposition?) => {
+    let contentDisp, fileName;
+    let remoteFileUrl = this.props.url;
+    try {
+      contentDisp = this.props.disposition && disposition ? disposition : null;
+      fileName = contentDisp.split(";")[1].split("=")[1];
+    } catch (e) {
+      fileName = this.props.saveAs
+        ? this.props.saveAs
+        : remoteFileUrl.replace(/^.*[\\\/]/, "");
+    }
+    this.makeFile(customBlob, fileName, blobType);
+  };
+
+  private getFileExtension = fileName => {
+    const nameMatchRegex = /(?:\.([^.]+))?$/;
+    const matchFileNameToRegex: any = nameMatchRegex.exec(fileName);
+    return matchFileNameToRegex.length > 0 ? matchFileNameToRegex[1] : fileName;
+  };
+  
+
+
   /**
    * Zooming in functionality of the viewer
    */
@@ -201,25 +224,35 @@ export default class Unlightbox extends React.Component<
   protected download = () => {
     let self = this;
     let remoteFileUrl = this.props.url;
-    let xhr = new XMLHttpRequest();
-    xhr.open("GET", remoteFileUrl, true);
-    xhr.responseType = "blob";
-    xhr.onload = function(e) {
-      if (this.status == 200) {
-        let contentDisp, fileName;
-        let blob = this.response;
-        try {
-          contentDisp = self.props.disposition
-            ? this.getResponseHeader("content-disposition")
-            : null;
-          fileName = contentDisp.split(";")[1].split("=")[1];
-        } catch (e) {
-          fileName = self.props.saveAs ? self.props.saveAs : remoteFileUrl.replace(/^.*[\\\/]/, "");
+    let fileType = this.getFileExtension(remoteFileUrl);
+    if (typeof fetch === "function") {
+      fetch(remoteFileUrl, { mode: "no-cors" })
+        .then(response => {
+          response.blob().then(blob => {
+            this.decodeBlobeResponse(blob, `image/${fileType}`);
+          });
+        })
+        .catch(e => {
+          console.error(e);
+        });
+    } else {
+      // Handle browsers older than 2 years :)
+      let xhr = new XMLHttpRequest();
+      xhr.open("GET", remoteFileUrl, true);
+      xhr.setRequestHeader("Sec-Fetch-Mode", "no-cors");
+      xhr.responseType = "blob";
+      xhr.onload = function(e) {
+        if (this.status == 200) {
+          let blob = this.response;
+          self.decodeBlobeResponse(
+            blob,
+            blob.type,
+            this.getResponseHeader("content-disposition")
+          );
         }
-        self.makeFile(blob, fileName, blob.type);
-      }
-    };
-    xhr.send();
+      };
+      xhr.send();
+    }
   };
 
   /**

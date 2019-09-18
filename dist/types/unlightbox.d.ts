@@ -20,6 +20,8 @@ export default class Unlightbox extends React.Component<IUnlightboxProps, Unligh
     private enableZoomIn;
     private disableZoomOut;
     private enableZoomOut;
+    private decodeBlobeResponse;
+    private getFileExtension;
     /**
      * Zooming in functionality of the viewer
      */
