@@ -5,13 +5,12 @@
   "main": "dist/index.js",
   "types": "dist/types/unlightbox.d.ts",
   "scripts": {
-    "test": "jest",
     "start": "webpack-dev-server --open --config webpack.dev.js & start-storybook -p 6006 -c .storybook",
     "storybook": "start-storybook -p 6006 -c .storybook",
     "watch": "webpack -w",
     "serve": "npm run watch | npm run start",
     "build": "webpack --config webpack.prod.js",
-    "demo": " webpack-dev-server --open --config webpack.demo.js"
+    "demo": " webpack --config webpack.demo.js"
   },
   "repository": {
     "type": "git",
@@ -68,16 +67,5 @@
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.9",
     "webpack-merge": "^4.1.4"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
-    "transform": {
-      "^.+\\.(ts|tsx)$": "ts-jest"
-    },
-    "testRegex": "/__tests__/.*\\.(ts|tsx|js)$"
   }
 }
