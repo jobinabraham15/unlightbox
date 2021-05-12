@@ -55,7 +55,7 @@
     "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^1.0.0",
     "jest": "^23.6.0",
-    "merge": "^1.2.1",
+    "merge": "^2.1.1",
     "react-docgen-typescript-loader": "^3.0.0",
     "react-docgen-typescript-webpack-plugin": "^1.1.0",
     "react-dom": "^16.5.2",
